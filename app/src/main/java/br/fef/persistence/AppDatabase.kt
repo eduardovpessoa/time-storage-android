@@ -6,8 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import br.fef.persistence.converter.DateConverter
+import br.fef.persistence.entity.Monster
 
-@Database(entities = [], version = 1)
+@Database(entities = [Monster::class], version = 1)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

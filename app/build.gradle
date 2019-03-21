@@ -9,18 +9,27 @@ apply plugin: "kotlin-kapt"
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "br.fef"
+        applicationId "br.fef.timestorage"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -35,7 +44,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0-alpha05'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation 'androidx.room:room-runtime:2.1.0-alpha05'
-    kapt 'androidx.room:room-compiler:2.1.0-alpha05' // For Kotlin use kapt instead of annotationProcessor
+    kapt 'androidx.room:room-compiler:2.1.0-alpha05'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
