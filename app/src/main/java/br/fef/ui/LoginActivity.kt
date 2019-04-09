@@ -1,5 +1,6 @@
 package br.fef.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -22,6 +23,10 @@ class LoginActivity : AppCompatActivity() {
             if (validateFields()) {
                 doLogin()
             }
+        }
+        txtLoginCadastrar.setOnClickListener {
+            val intent = Intent(this, CadastroActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -47,7 +52,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun doLogin() {
-        val login = Login(edtUsuario.text.toString(), edtSenha.text.toString().hash())
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        /*val login = Login(edtUsuario.text.toString(), edtSenha.text.toString().hash())
         val json = Gson().toJson(login)
         val client = OkHttpClient()
         val body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json)
@@ -59,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
             override fun onResponse(call: Call, response: Response) = println(response.body()?.string())
-        })
+        })*/
     }
 
     private fun String.isValidEmail(): Boolean {
