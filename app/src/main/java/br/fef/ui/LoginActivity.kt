@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun doLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         /*val login = Login(edtUsuario.text.toString(), edtSenha.text.toString().hash())
         val json = Gson().toJson(login)
