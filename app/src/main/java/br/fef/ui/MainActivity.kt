@@ -7,7 +7,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import br.fef.R
+import br.fef.ui.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -25,8 +27,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
         nav_view.setNavigationItemSelectedListener(this)
+        replaceFragment(HomeFragment())
     }
 
     override fun onBackPressed() {
@@ -54,12 +56,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
-
+            R.id.nav_home -> {
+                title = "Time Storage - Início"
+                replaceFragment(HomeFragment())
+            }
+            R.id.nav_autor -> {
+                title = "Time Storage - Autores"
+                replaceFragment(AutorFragment())
+            }
+            R.id.nav_categoria -> {
+                title = "Time Storage - Categorias"
+                replaceFragment(CategoriaFragment())
+            }
+            R.id.nav_editora -> {
+                title = "Time Storage - Editoras"
+                replaceFragment(EditoraFragment())
+            }
+            R.id.nav_genero -> {
+                title = "Time Storage - Gêneros"
+                replaceFragment(GeneroFragment())
+            }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_main, fragment)
+        transaction.commit()
     }
 }

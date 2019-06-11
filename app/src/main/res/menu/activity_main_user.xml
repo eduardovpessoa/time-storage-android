@@ -5,11 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_camera"
+                android:id="@+id/nav_home"
                 android:icon="@drawable/ic_home_black_24dp"
                 android:title="Início"/>
         <item
-                android:id="@+id/nav_gallery"
+                android:id="@+id/nav_doc"
                 android:icon="@drawable/ic_description_black_24dp"
                 android:title="Documentos"/>
         <item
@@ -20,26 +20,18 @@
                 android:id="@+id/nav_config"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="Configurações"/>
+        <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_info_outline_black_24dp"
+                android:title="Sobre"/>
+        <item
+                android:id="@+id/nav_sair"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="Sair"/>
     </group>
 
     <item android:title="Cadastros">
         <menu>
-            <item
-                    android:id="@+id/nav_autor"
-                    android:icon="@drawable/ic_person_black_24dp"
-                    android:title="Autor"/>
-            <item
-                    android:id="@+id/nav_categoria"
-                    android:icon="@drawable/ic_widgets_black_24dp"
-                    android:title="Categoria"/>
-            <item
-                    android:id="@+id/nav_editora"
-                    android:icon="@drawable/ic_edit_black_24dp"
-                    android:title="Editora"/>
-            <item
-                    android:id="@+id/nav_genero"
-                    android:icon="@drawable/ic_people_black_24dp"
-                    android:title="Gênero"/>
             <item
                     android:id="@+id/nav_new_doc"
                     android:icon="@drawable/ic_menu_camera"

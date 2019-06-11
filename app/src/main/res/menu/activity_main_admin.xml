@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="all">
+        <item
+                android:id="@+id/nav_camera"
+                android:icon="@drawable/ic_home_black_24dp"
+                android:title="Início"/>
+        <item
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/ic_description_black_24dp"
+                android:title="Documentos"/>
+        <item
+                android:id="@+id/nav_fav"
+                android:icon="@drawable/ic_star_black_24dp"
+                android:title="Favoritos"/>
+        <item
+                android:id="@+id/nav_config"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Configurações"/>
+    </group>
+
+    <item android:title="Cadastros">
+        <menu>
+            <group android:checkableBehavior="all">
+                <item
+                        android:id="@+id/nav_autor"
+                        android:icon="@drawable/ic_person_black_24dp"
+                        android:title="Autor"/>
+                <item
+                        android:id="@+id/nav_categoria"
+                        android:icon="@drawable/ic_widgets_black_24dp"
+                        android:title="Categoria"/>
+                <item
+                        android:id="@+id/nav_editora"
+                        android:icon="@drawable/ic_edit_black_24dp"
+                        android:title="Editora"/>
+                <item
+                        android:id="@+id/nav_genero"
+                        android:icon="@drawable/ic_people_black_24dp"
+                        android:title="Gênero"/>
+                <item
+                        android:id="@+id/nav_new_doc"
+                        android:icon="@drawable/ic_menu_camera"
+                        android:title="Novo Documento"/>
+            </group>
+        </menu>
+    </item>
+
+</menu>

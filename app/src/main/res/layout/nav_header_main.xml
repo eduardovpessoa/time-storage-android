@@ -25,13 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="Eduardo"
+            android:text="Administrador"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="eduardo.vianap@gmail.com"
+            android:text="administrador@timestorage.com"
             android:id="@+id/textView"/>
 
 </LinearLayout>
