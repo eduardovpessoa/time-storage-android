@@ -81,32 +81,47 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        var fragment = Fragment()
+        val args = Bundle()
+        args.putInt("codigo", user.cod)
+        args.putInt("tipo", user.tipo)
         when (item.itemId) {
             R.id.nav_home -> {
                 title = "Time Storage - Início"
-                replaceFragment(HomeFragment())
+                fragment = HomeFragment()
+            }
+            R.id.nav_doc -> {
+                title = "Time Storage - Documentos"
+                fragment = DocumentoFragment()
+                fragment.arguments = args
+            }
+            R.id.nav_new_doc -> {
+                title = "Time Storage - Enviar Documentos"
+                fragment = EnviarDocumentoFragment()
+                fragment.arguments = args
             }
             R.id.nav_autor -> {
                 title = "Time Storage - Autores"
-                replaceFragment(AutorFragment())
+                fragment = AutorFragment()
             }
             R.id.nav_categoria -> {
                 title = "Time Storage - Categorias"
-                replaceFragment(CategoriaFragment())
+                fragment = CategoriaFragment()
             }
             R.id.nav_editora -> {
                 title = "Time Storage - Editoras"
-                replaceFragment(EditoraFragment())
+                fragment = EditoraFragment()
             }
             R.id.nav_genero -> {
                 title = "Time Storage - Gêneros"
-                replaceFragment(GeneroFragment())
+                fragment = GeneroFragment()
             }
             R.id.nav_sair -> {
                 userDao.deleteAll()
                 finish()
             }
         }
+        replaceFragment(fragment)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

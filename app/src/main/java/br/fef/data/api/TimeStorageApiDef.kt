@@ -1,12 +1,12 @@
 package br.fef.data.api
 
+import br.fef.data.api.dto.Categoria
 import br.fef.data.api.dto.Login
 import br.fef.data.api.dto.Register
 import br.fef.data.persistence.entity.User
 import okhttp3.Response
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface TimeStorageApiDef {
 
@@ -15,4 +15,7 @@ interface TimeStorageApiDef {
 
     @POST("cadastrar")
     fun doRegister(@Body register: Register): Call<Void>
+
+    @GET("categoria")
+    fun getAllCategorias() : Call<List<Categoria>>
 }

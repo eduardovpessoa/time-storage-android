@@ -1,5 +1,6 @@
 package br.fef.data.api
 
+import br.fef.data.api.dto.Categoria
 import br.fef.data.api.dto.Login
 import br.fef.data.api.dto.Register
 import br.fef.data.persistence.entity.User
@@ -27,6 +28,10 @@ class TimeStorageApi : TimeStorageApiDef {
 
     override fun doRegister(register: Register): Call<Void> {
         return service.doRegister(register)
+    }
+
+    override fun getAllCategorias(): Call<List<Categoria>> {
+        return service.getAllCategorias()
     }
 
 }
