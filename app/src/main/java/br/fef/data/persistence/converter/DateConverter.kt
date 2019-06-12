@@ -1,4 +1,4 @@
-package br.fef.persistence.converter
+package br.fef.data.persistence.converter
 
 import androidx.room.TypeConverter
 

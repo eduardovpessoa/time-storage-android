@@ -13,29 +13,25 @@
                 android:icon="@drawable/ic_description_black_24dp"
                 android:title="Documentos"/>
         <item
+                android:id="@+id/nav_new_doc"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="Enviar Documento"/>
+        <item
                 android:id="@+id/nav_fav"
                 android:icon="@drawable/ic_star_black_24dp"
                 android:title="Favoritos"/>
-        <item
-                android:id="@+id/nav_config"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Configurações"/>
-        <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_info_outline_black_24dp"
-                android:title="Sobre"/>
-        <item
-                android:id="@+id/nav_sair"
-                android:icon="@drawable/ic_exit_to_app_black_24dp"
-                android:title="Sair"/>
     </group>
 
-    <item android:title="Cadastros">
+    <item android:title="Opções">
         <menu>
             <item
-                    android:id="@+id/nav_new_doc"
-                    android:icon="@drawable/ic_menu_camera"
-                    android:title="Novo Documento"/>
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_info_outline_black_24dp"
+                    android:title="Sobre"/>
+            <item
+                    android:id="@+id/nav_sair"
+                    android:icon="@drawable/ic_exit_to_app_black_24dp"
+                    android:title="Sair"/>
         </menu>
     </item>
 </menu>

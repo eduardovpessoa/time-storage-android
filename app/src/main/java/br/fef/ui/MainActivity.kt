@@ -7,18 +7,32 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import br.fef.R
+import br.fef.data.persistence.AppDatabase
+import br.fef.data.persistence.dao.UserDao
+import br.fef.data.persistence.entity.User
 import br.fef.ui.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var appDatabase: AppDatabase
+    private lateinit var userDao: UserDao
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        appDatabase = AppDatabase.getDatabase(this)
+        userDao = appDatabase.userDao()
+        user = userDao.queryAll()[0]
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar,
@@ -28,6 +42,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
+        if (user.tipo == 1) {
+            nav_view.inflateMenu(R.menu.activity_main_admin)
+        } else {
+            nav_view.inflateMenu(R.menu.activity_main_user)
+        }
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val headerView: View = navigationView.getHeaderView(0)
+        val navTxtUser: TextView = headerView.findViewById(R.id.txtUser)
+        val navTxtEmail: TextView = headerView.findViewById(R.id.txtEmail)
+        navTxtUser.text = user.nome
+        navTxtEmail.text = user.email
         replaceFragment(HomeFragment())
     }
 
@@ -76,6 +101,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_genero -> {
                 title = "Time Storage - Gêneros"
                 replaceFragment(GeneroFragment())
+            }
+            R.id.nav_sair -> {
+                userDao.deleteAll()
+                finish()
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
