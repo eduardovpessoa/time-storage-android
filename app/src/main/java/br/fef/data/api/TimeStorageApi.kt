@@ -3,6 +3,7 @@ package br.fef.data.api
 import br.fef.data.api.dto.Login
 import br.fef.data.api.dto.Register
 import br.fef.data.persistence.entity.User
+import okhttp3.Response
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,7 +25,7 @@ class TimeStorageApi : TimeStorageApiDef {
         return service.doLogin(login)
     }
 
-    override fun doRegister(register: Register): Call<Register> {
+    override fun doRegister(register: Register): Call<Void> {
         return service.doRegister(register)
     }
 

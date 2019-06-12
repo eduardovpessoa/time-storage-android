@@ -4,21 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import android.view.View
 import android.widget.Toast
 import br.fef.R
 import br.fef.data.api.TimeStorageApi
-import br.fef.data.api.dto.Login
 import br.fef.data.api.dto.Register
 import br.fef.data.persistence.AppDatabase
 import br.fef.data.persistence.dao.UserDao
-import br.fef.data.persistence.entity.User
 import kotlinx.android.synthetic.main.activity_cadastro.*
-import kotlinx.android.synthetic.main.activity_login.*
+import okhttp3.Response
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
 import java.security.MessageDigest
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CadastroActivity : AppCompatActivity() {
 
@@ -116,24 +114,24 @@ class CadastroActivity : AppCompatActivity() {
 
     private fun register() {
         val api = TimeStorageApi()
-        val request: Call<Register> = api.doRegister(
+        val request: Call<Void> = api.doRegister(
             Register(
                 edtCadastroNome.text.toString(),
                 edtCadastroSobrenome.text.toString(),
                 edtCadastroTelefone.text.toString(),
-                edtCadastroNascimento.text.toString(),
+                formatDate(edtCadastroNascimento.text.toString()),
                 edtCadastroEmail.text.toString(),
                 edtCadastroSenha.text.toString().hash()
             )
         )
 
-        request.enqueue(object : Callback<Register> {
-            override fun onFailure(call: Call<Register?>, t: Throwable?) {
+        request.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable?) {
                 showError("Problemas ao realizar o registro! ${t?.message}")
                 Log.e("onFailure error", t?.message)
             }
 
-            override fun onResponse(call: Call<Register?>, response: Response<Register?>?) {
+            override fun onResponse(call: Call<Void>, response: retrofit2.Response<Void>?) {
                 if (response?.code() == 200 || response?.code() == 201) {
                     showError("Cadastrado com sucesso! Faça o Login!")
                     finish()
@@ -152,6 +150,11 @@ class CadastroActivity : AppCompatActivity() {
 
     fun showError(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
+    fun formatDate(dataNasc: String): String {
+        val date = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).parse(dataNasc)
+        return SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR")).format(date)
     }
 
 
