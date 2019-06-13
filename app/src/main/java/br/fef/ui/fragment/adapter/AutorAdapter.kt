@@ -12,7 +12,7 @@ import br.fef.data.api.dto.Autor
 class AutorAdapter(var autorList: List<Autor>?) : RecyclerView.Adapter<AutorAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(autorList?.get(position))
+        holder.bindView(autorList?.get(position), position % 2 != 0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,10 +26,12 @@ class AutorAdapter(var autorList: List<Autor>?) : RecyclerView.Adapter<AutorAdap
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.txtRow)
-        fun bindView(autor: Autor?) {
+        fun bindView(autor: Autor?, colorido: Boolean) {
             title.text = autor?.toString()
             if (autor?.status == 1)
                 title.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorAccent))
+            if (colorido)
+                itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.backgroundGrey))
         }
     }
 }

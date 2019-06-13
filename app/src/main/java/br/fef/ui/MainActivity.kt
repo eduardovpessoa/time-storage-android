@@ -1,5 +1,6 @@
 package br.fef.ui
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
@@ -9,12 +10,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.fef.R
 import br.fef.data.persistence.AppDatabase
 import br.fef.data.persistence.dao.UserDao
 import br.fef.data.persistence.entity.User
 import br.fef.ui.fragment.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var appDatabase: AppDatabase
     private lateinit var userDao: UserDao
     private lateinit var user: User
+    private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,14 +57,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navTxtEmail: TextView = headerView.findViewById(R.id.txtEmail)
         navTxtUser.text = user.nome
         navTxtEmail.text = user.email
-        replaceFragment(HomeFragment())
+        fragment = HomeFragment()
+        replaceFragment(fragment)
+
+        fab.setOnClickListener {
+            if (fragment is AutorFragment) {
+                val intent = Intent(this, CadastrarAutorActivity::class.java)
+                startActivityForResult(intent, REQUEST_CATEGORIA)
+            } else if (fragment is CategoriaFragment) {
+                val intent = Intent(this, CadastrarCategoriaActivity::class.java)
+                startActivityForResult(intent, REQUEST_CATEGORIA)
+            } else if (fragment is DocumentoFragment) {
+                //TODO CADASTRAR DOCUMENTO
+            } else if (fragment is EditoraFragment) {
+                val intent = Intent(this, CadastrarEditoraActivity::class.java)
+                startActivityForResult(intent, REQUEST_EDITORA)
+            } else if (fragment is GeneroFragment) {
+                val intent = Intent(this, CadastrarGeneroActivity::class.java)
+                startActivityForResult(intent, REQUEST_GENERO)
+            }
+
+        }
     }
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            title = "Time Storage - Início"
+            replaceFragment(HomeFragment())
         }
     }
 
@@ -81,40 +106,48 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var fragment = Fragment()
         val args = Bundle()
         args.putInt("codigo", user.cod)
         args.putInt("tipo", user.tipo)
         when (item.itemId) {
             R.id.nav_home -> {
+                fab.visibility = FloatingActionButton.INVISIBLE
                 title = "Time Storage - Início"
                 fragment = HomeFragment()
             }
             R.id.nav_doc -> {
+                fab.visibility = FloatingActionButton.VISIBLE
                 title = "Time Storage - Documentos"
                 fragment = DocumentoFragment()
                 fragment.arguments = args
             }
-            R.id.nav_new_doc -> {
-                title = "Time Storage - Enviar Documentos"
-                fragment = EnviarDocumentoFragment()
-                fragment.arguments = args
+            R.id.nav_fav -> {
+                fab.visibility = FloatingActionButton.INVISIBLE
+                title = "Time Storage - Favoritos"
+                //fragment = GeneroFragment()
             }
             R.id.nav_autor -> {
+                fab.visibility = FloatingActionButton.VISIBLE
                 title = "Time Storage - Autores"
                 fragment = AutorFragment()
             }
             R.id.nav_categoria -> {
+                fab.visibility = FloatingActionButton.VISIBLE
                 title = "Time Storage - Categorias"
                 fragment = CategoriaFragment()
             }
             R.id.nav_editora -> {
+                fab.visibility = FloatingActionButton.VISIBLE
                 title = "Time Storage - Editoras"
                 fragment = EditoraFragment()
             }
             R.id.nav_genero -> {
+                fab.visibility = FloatingActionButton.VISIBLE
                 title = "Time Storage - Gêneros"
                 fragment = GeneroFragment()
+            }
+            R.id.nav_about -> {
+                Toast.makeText(this, "Time Storage - v.1.0\nCopyright 2019", Toast.LENGTH_LONG).show()
             }
             R.id.nav_sair -> {
                 userDao.deleteAll()
@@ -131,4 +164,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         transaction.replace(R.id.frame_main, fragment)
         transaction.commit()
     }
+
+    companion object {
+        const val REQUEST_AUTOR: Int = 110
+        const val REQUEST_CATEGORIA: Int = 120
+        const val REQUEST_DOCUMENTO: Int = 130
+        const val REQUEST_EDITORA: Int = 140
+        const val REQUEST_GENERO: Int = 150
+    }
+
+
 }

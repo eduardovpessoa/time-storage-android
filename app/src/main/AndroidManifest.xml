@@ -6,17 +6,28 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-            android:usesCleartextTraffic="true"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true">
+        <activity
+                android:name=".ui.CadastrarAutorActivity"
+                android:label="Time Storage - Novo Autor"/>
+        <activity
+                android:name=".ui.CadastrarCategoriaActivity"
+                android:label="Time Storage - Nova Categoria"/>
+        <activity
+                android:name=".ui.CadastrarEditoraActivity"
+                android:label="Time Storage - Nova Editora"/>
+        <activity
+                android:name=".ui.CadastrarGeneroActivity"
+                android:label="Time Storage - Novo Gênero"/>
         <activity
                 android:name=".ui.CadastroActivity"
-                android:label="@string/title_activity_cadastro">
-        </activity>
+                android:label="@string/title_activity_cadastro"/>
         <activity
                 android:name=".ui.LoginActivity"
                 android:label="@string/title_activity_login">
@@ -29,8 +40,7 @@
         <activity
                 android:name=".ui.MainActivity"
                 android:label="@string/app_name"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+                android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

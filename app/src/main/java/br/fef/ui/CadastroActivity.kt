@@ -126,7 +126,7 @@ class CadastroActivity : AppCompatActivity() {
 
         request.enqueue(object : Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable?) {
-                showError("Problemas ao realizar o registro! ${t?.message}")
+                showError("Problemas ao salvar o registro! ${t?.message}")
                 Log.e("onFailure error", t?.message)
             }
 

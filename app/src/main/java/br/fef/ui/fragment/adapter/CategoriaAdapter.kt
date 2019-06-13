@@ -12,7 +12,7 @@ import br.fef.data.api.dto.Categoria
 class CategoriaAdapter(var categoriaList: List<Categoria>?) : RecyclerView.Adapter<CategoriaAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(categoriaList?.get(position))
+        holder.bindView(categoriaList?.get(position), position % 2 != 0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,10 +26,12 @@ class CategoriaAdapter(var categoriaList: List<Categoria>?) : RecyclerView.Adapt
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.txtRow)
-        fun bindView(categoria: Categoria?) {
+        fun bindView(categoria: Categoria?, colorido: Boolean) {
             title.text = categoria!!.descricao
             if (categoria.status == 1)
                 title.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorAccent))
+            if (colorido)
+                itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.backgroundGrey))
         }
     }
 }

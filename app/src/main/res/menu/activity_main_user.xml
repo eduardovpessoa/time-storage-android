@@ -13,10 +13,6 @@
                 android:icon="@drawable/ic_description_black_24dp"
                 android:title="Documentos"/>
         <item
-                android:id="@+id/nav_new_doc"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="Enviar Documento"/>
-        <item
                 android:id="@+id/nav_fav"
                 android:icon="@drawable/ic_star_black_24dp"
                 android:title="Favoritos"/>

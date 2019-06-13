@@ -44,4 +44,36 @@ class TimeStorageApi : TimeStorageApiDef {
         return service.getAllGeneros()
     }
 
+    override fun sendAutor(autor: Autor): Call<Void> {
+        return service.sendAutor(autor)
+    }
+
+    override fun sendCategoria(categoria: Categoria): Call<Void> {
+        return service.sendCategoria(categoria)
+    }
+
+    override fun sendEditora(editora: Editora): Call<Void> {
+        return service.sendEditora(editora)
+    }
+
+    override fun sendGenero(genero: Genero): Call<Void> {
+        return service.sendGenero(genero)
+    }
+
+    override fun alterAutor(autor: Autor): Call<Void> {
+        return service.alterAutor(autor)
+    }
+
+    override fun alterCategoria(categoria: Categoria): Call<Void> {
+        return service.alterCategoria(categoria)
+    }
+
+    override fun alterEditora(editora: Editora): Call<Void> {
+        return service.sendEditora(editora)
+    }
+
+    override fun alterGenero(genero: Genero): Call<Void> {
+        return service.sendGenero(genero)
+    }
+
 }
