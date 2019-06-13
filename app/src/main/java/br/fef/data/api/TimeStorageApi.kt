@@ -40,7 +40,7 @@ class TimeStorageApi : TimeStorageApiDef {
         return service.getDashboard()
     }
 
-    override fun getDocumentoDetail(cod: Int?): Call<Documento> {
+    override fun getDocumentoDetail(cod: Int?): Call<List<Documento>> {
         return service.getDocumentoDetail(cod)
     }
 
@@ -54,6 +54,10 @@ class TimeStorageApi : TimeStorageApiDef {
 
     override fun getAllGeneros(): Call<List<Genero>> {
         return service.getAllGeneros()
+    }
+
+    override fun getAllImagens(cod: Int?): Call<List<Imagem>> {
+        return service.getAllImagens(cod)
     }
 
     override fun sendAutor(autor: Autor): Call<Void> {

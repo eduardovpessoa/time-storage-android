@@ -27,13 +27,16 @@ interface TimeStorageApiDef {
     fun getAllDocumentos(): Call<List<DocumentoSimplificado>>
 
     @GET("documentos")
-    fun getDocumentoDetail(@Query("cod") cod: Int?): Call<Documento>
+    fun getDocumentoDetail(@Query("cod") cod: Int?): Call<List<Documento>>
 
     @GET("editora")
     fun getAllEditoras(): Call<List<Editora>>
 
     @GET("genero")
     fun getAllGeneros(): Call<List<Genero>>
+
+    @GET("imagens")
+    fun getAllImagens(@Query("cod") cod: Int?): Call<List<Imagem>>
 
     @POST("envautor")
     fun sendAutor(@Body autor: Autor): Call<Void>
