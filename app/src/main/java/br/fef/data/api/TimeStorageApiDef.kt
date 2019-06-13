@@ -1,8 +1,6 @@
 package br.fef.data.api
 
-import br.fef.data.api.dto.Categoria
-import br.fef.data.api.dto.Login
-import br.fef.data.api.dto.Register
+import br.fef.data.api.dto.*
 import br.fef.data.persistence.entity.User
 import okhttp3.Response
 import retrofit2.Call
@@ -16,6 +14,16 @@ interface TimeStorageApiDef {
     @POST("cadastrar")
     fun doRegister(@Body register: Register): Call<Void>
 
+    @GET("autor")
+    fun getAllAutores() : Call<List<Autor>>
+
     @GET("categoria")
     fun getAllCategorias() : Call<List<Categoria>>
+
+    @GET("editora")
+    fun getAllEditoras() : Call<List<Editora>>
+
+    @GET("genero")
+    fun getAllGeneros() : Call<List<Genero>>
+
 }

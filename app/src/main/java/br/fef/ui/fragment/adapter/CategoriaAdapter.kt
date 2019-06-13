@@ -1,34 +1,35 @@
 package br.fef.ui.fragment.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import br.fef.R
 import br.fef.data.api.dto.Categoria
-import kotlinx.android.synthetic.main.row_categoria.view.*
 
-class CategoriaAdapter(private val categoriaList: List<Categoria>, private val context: Context) :
-    RecyclerView.Adapter<CategoriaAdapter.ViewHolder>() {
+class CategoriaAdapter(var categoriaList: List<Categoria>?) : RecyclerView.Adapter<CategoriaAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val categoria = categoriaList[position]
-        holder.bindView(categoria)
+        holder.bindView(categoriaList?.get(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.row_categoria, parent, false))
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.row_adapter, parent, false)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return categoriaList.size
+        return categoriaList?.size!!
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(categoria: Categoria) {
-            val title = itemView.txtRowCategoria
-            title.text = categoria.toString()
+        var title: TextView = itemView.findViewById(R.id.txtRow)
+        fun bindView(categoria: Categoria?) {
+            title.text = categoria!!.descricao
+            if (categoria.status == 1)
+                title.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorAccent))
         }
     }
 }

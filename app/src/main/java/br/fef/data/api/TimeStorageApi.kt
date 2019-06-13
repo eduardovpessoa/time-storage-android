@@ -1,8 +1,6 @@
 package br.fef.data.api
 
-import br.fef.data.api.dto.Categoria
-import br.fef.data.api.dto.Login
-import br.fef.data.api.dto.Register
+import br.fef.data.api.dto.*
 import br.fef.data.persistence.entity.User
 import okhttp3.Response
 import retrofit2.Call
@@ -30,8 +28,20 @@ class TimeStorageApi : TimeStorageApiDef {
         return service.doRegister(register)
     }
 
+    override fun getAllAutores(): Call<List<Autor>> {
+        return service.getAllAutores()
+    }
+
     override fun getAllCategorias(): Call<List<Categoria>> {
         return service.getAllCategorias()
+    }
+
+    override fun getAllEditoras(): Call<List<Editora>> {
+        return service.getAllEditoras()
+    }
+
+    override fun getAllGeneros(): Call<List<Genero>> {
+        return service.getAllGeneros()
     }
 
 }

@@ -11,7 +11,6 @@ import br.fef.data.api.dto.Register
 import br.fef.data.persistence.AppDatabase
 import br.fef.data.persistence.dao.UserDao
 import kotlinx.android.synthetic.main.activity_cadastro.*
-import okhttp3.Response
 import retrofit2.Call
 import retrofit2.Callback
 import java.security.MessageDigest
@@ -148,11 +147,11 @@ class CadastroActivity : AppCompatActivity() {
         return digest.fold("") { str, it -> str + "%02x".format(it) }
     }
 
-    fun showError(message: String) {
+    private fun showError(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
-    fun formatDate(dataNasc: String): String {
+    private fun formatDate(dataNasc: String): String {
         val date = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).parse(dataNasc)
         return SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR")).format(date)
     }

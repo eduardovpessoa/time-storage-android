@@ -2,47 +2,58 @@ package br.fef.ui.fragment
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import kotlinx.android.synthetic.main.fragment_autor.*
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import br.fef.R
+import br.fef.data.api.TimeStorageApi
+import br.fef.data.api.dto.Autor
+import br.fef.ui.fragment.adapter.AutorAdapter
+import kotlinx.android.synthetic.main.fragment_generic.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class AutorFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(br.fef.R.layout.fragment_autor, container, false)
+    private var autorList: List<Autor> = ArrayList()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_generic, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var recyclerView: RecyclerView = view.findViewById(R.id.recyclerGeneric)
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        recyclerView.addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
+        val api = TimeStorageApi()
+        val request: Call<List<Autor>> = api.getAllAutores()
+        request.enqueue(object : Callback<List<Autor>> {
+            override fun onFailure(call: Call<List<Autor>>?, t: Throwable?) {
+                showError("Problemas ao realizar o registro! ${t?.message}")
+                Log.e("onFailure error", t?.message)
+            }
 
-        val values = arrayOf(
-            "Antônio Fernandes",
-            "Celso Mello",
-            "Felipe Cavalcanti",
-            "Lucas Gonçalves",
-            "Ricardo Pessoa"
-        )
+            override fun onResponse(call: Call<List<Autor>>?, response: Response<List<Autor>>?) {
+                if (response?.code() == 200) {
+                    autorList = response.body()!!
+                    recyclerGeneric.adapter = AutorAdapter(autorList)
+                }
+            }
+        })
 
-        val adapter = ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_1, values)
-        lst_view_autor.adapter = adapter
+    }
+
+    fun showError(message: String) {
+        Toast.makeText(view?.context, message, Toast.LENGTH_LONG).show()
     }
 
 

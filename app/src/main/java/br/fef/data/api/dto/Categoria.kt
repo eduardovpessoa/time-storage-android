@@ -1,11 +1,12 @@
 package br.fef.data.api.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class Categoria(
-    private val idCategoria: Int,
-    private val descricaoCategoria: String,
-    private val statusCategoria: Int
-) {
-    override fun toString(): String {
-        return descricaoCategoria
-    }
-}
+    @SerializedName("id_categoria")
+    val id: Int,
+    @SerializedName("descricao_categoria")
+    val descricao: String,
+    @SerializedName("status_categoria")
+    val status: Int
+)
