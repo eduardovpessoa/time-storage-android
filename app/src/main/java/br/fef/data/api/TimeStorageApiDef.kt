@@ -20,6 +20,15 @@ interface TimeStorageApiDef {
     @GET("categoria")
     fun getAllCategorias(): Call<List<Categoria>>
 
+    @GET("dashboard")
+    fun getDashboard(): Call<List<Dashboard>>
+
+    @GET("documentos")
+    fun getAllDocumentos(): Call<List<DocumentoSimplificado>>
+
+    @GET("documentos")
+    fun getDocumentoDetail(@Query("cod") cod: Int?): Call<Documento>
+
     @GET("editora")
     fun getAllEditoras(): Call<List<Editora>>
 

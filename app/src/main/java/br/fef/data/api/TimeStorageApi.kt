@@ -36,6 +36,18 @@ class TimeStorageApi : TimeStorageApiDef {
         return service.getAllCategorias()
     }
 
+    override fun getDashboard(): Call<List<Dashboard>> {
+        return service.getDashboard()
+    }
+
+    override fun getDocumentoDetail(cod: Int?): Call<Documento> {
+        return service.getDocumentoDetail(cod)
+    }
+
+    override fun getAllDocumentos(): Call<List<DocumentoSimplificado>> {
+        return service.getAllDocumentos()
+    }
+
     override fun getAllEditoras(): Call<List<Editora>> {
         return service.getAllEditoras()
     }

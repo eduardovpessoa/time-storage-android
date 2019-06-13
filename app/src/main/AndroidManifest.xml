@@ -14,6 +14,11 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
         <activity
+                android:name=".ui.DocumentoDetalheActivity"
+                android:label="@string/title_activity_documento_detalhe"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
                 android:name=".ui.CadastrarAutorActivity"
                 android:label="Time Storage - Novo Autor"/>
         <activity
