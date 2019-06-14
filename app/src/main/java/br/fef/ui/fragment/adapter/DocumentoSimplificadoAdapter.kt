@@ -62,7 +62,7 @@ class DocumentoSimplificadoAdapter(
             else
                 itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.backgroundGrey))
             itemView.setOnClickListener {
-                listener.onClickListener(documentoSimplificado?.id)
+                //listener.onClickListener(documentoSimplificado?.id)
             }
         }
 
